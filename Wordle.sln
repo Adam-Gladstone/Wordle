@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordleConsole", "WordleConsole\WordleConsole.vcxproj", "{089CC5A9-B414-4973-958D-66611DE8D16C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordleLib", "WordleLib\WordleLib.vcxproj", "{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordleTest", "WordleTest\WordleTest.vcxproj", "{6FF47BC8-1490-481E-98EE-BEA6C19A969E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Debug|x64.ActiveCfg = Debug|x64
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Debug|x64.Build.0 = Debug|x64
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Debug|x86.ActiveCfg = Debug|Win32
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Debug|x86.Build.0 = Debug|Win32
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Release|x64.ActiveCfg = Release|x64
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Release|x64.Build.0 = Release|x64
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Release|x86.ActiveCfg = Release|Win32
+		{089CC5A9-B414-4973-958D-66611DE8D16C}.Release|x86.Build.0 = Release|Win32
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Debug|x64.ActiveCfg = Debug|x64
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Debug|x64.Build.0 = Debug|x64
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Debug|x86.ActiveCfg = Debug|Win32
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Debug|x86.Build.0 = Debug|Win32
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Release|x64.ActiveCfg = Release|x64
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Release|x64.Build.0 = Release|x64
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Release|x86.ActiveCfg = Release|Win32
+		{15B0DBCE-128D-4EF4-9C51-B09B942C1C6B}.Release|x86.Build.0 = Release|Win32
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Debug|x64.ActiveCfg = Debug|x64
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Debug|x64.Build.0 = Debug|x64
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Debug|x86.ActiveCfg = Debug|Win32
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Debug|x86.Build.0 = Debug|Win32
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Release|x64.ActiveCfg = Release|x64
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Release|x64.Build.0 = Release|x64
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Release|x86.ActiveCfg = Release|Win32
+		{6FF47BC8-1490-481E-98EE-BEA6C19A969E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E4CFD18-5739-4615-AD22-CB0DD26CFBC5}
+	EndGlobalSection
+EndGlobal
