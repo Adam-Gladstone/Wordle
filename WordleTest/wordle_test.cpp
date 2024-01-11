@@ -58,6 +58,36 @@ TEST(TestWordle, TestReportNoHits)
 	EXPECT_EQ(no_hits, target);
 }
 
+TEST(TestWordle, TestReportOneHit)
+{
+	// Arrange
+	std::array<wordle::result, wordle::length> one_hit
+	{
+		{ wordle::result::green, wordle::result::grey, wordle::result::grey, wordle::result::grey, wordle::result::grey }
+	};
+
+	// Act
+	auto target = wordle::report("super", "stand");
+
+	// Assert
+	EXPECT_EQ(one_hit, target);
+}
+
+TEST(TestWordle, TestReportFourHits)
+{
+	// Arrange
+	std::array<wordle::result, wordle::length> four_hits
+	{
+		{ wordle::result::green, wordle::result::green, wordle::result::grey, wordle::result::green, wordle::result::green }
+	};
+
+	// Act
+	auto target = wordle::report("later", "laser");
+
+	// Assert
+	EXPECT_EQ(four_hits, target);
+}
+
 TEST(TestWordle, TestReportAllHits)
 {
 	// Arrange
