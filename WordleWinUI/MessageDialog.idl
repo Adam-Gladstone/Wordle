@@ -1,0 +1,9 @@
+namespace WordleWinUI
+{
+    [default_interface]
+    runtimeclass MessageDialog : Microsoft.UI.Xaml.Controls.Page
+    {
+        MessageDialog();
+        String MessageText;
+    }
+}

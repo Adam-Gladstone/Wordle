@@ -1,0 +1,12 @@
+import "MainViewModel.idl";
+
+namespace WordleWinUI
+{
+    [default_interface]
+    runtimeclass MainPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        MainPage();
+
+        MainViewModel ViewModel{ get; };
+    }
+}

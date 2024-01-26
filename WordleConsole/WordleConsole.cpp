@@ -34,8 +34,7 @@ auto main() -> int
     // Add some notion of a session to ensure target words are not repeated
     std::cout << "You have 5 attempts to deduce the word. Good luck!\n";
     const auto index = wordle::get_index(wordle::count);
-    //const std::string_view target = wordle::select_word(index);
-    const std::string_view target{ "extra" };
+    const std::string_view target = wordle::select_word(index);
     std::cout << "Target word: " << target << '\n';
 
     auto win = false;

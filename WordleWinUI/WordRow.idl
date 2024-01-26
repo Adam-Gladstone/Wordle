@@ -1,0 +1,14 @@
+// WordRow.idl
+
+import "Letter.idl";
+
+namespace WordleWinUI
+{
+	[Microsoft.UI.Xaml.Data.Bindable]
+	runtimeclass WordRow : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		WordRow();
+
+		Windows.Foundation.Collections.IObservableVector<Letter> Letters;
+	}
+}

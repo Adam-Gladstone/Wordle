@@ -1,0 +1,15 @@
+// Letter.idl
+
+namespace WordleWinUI
+{
+	[Microsoft.UI.Xaml.Data.Bindable]
+	runtimeclass Letter : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		Letter();
+
+		String Input;
+	
+		Microsoft.UI.Xaml.Media.Brush ColorBrush;
+	}
+
+}

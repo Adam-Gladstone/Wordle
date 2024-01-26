@@ -73,6 +73,36 @@ TEST(TestWordle, TestReportOneHit)
 	EXPECT_EQ(one_hit, target);
 }
 
+TEST(TestWordle, TestReportTwoHits)
+{
+	// Arrange
+	std::array<wordle::result, wordle::length> two_hits
+	{
+		{ wordle::result::green, wordle::result::green, wordle::result::grey, wordle::result::grey, wordle::result::grey }
+	};
+
+	// Act
+	auto target = wordle::report("billy", "birth");
+
+	// Assert
+	EXPECT_EQ(two_hits, target);
+}
+
+TEST(TestWordle, TestReportThreeHits)
+{
+	// Arrange
+	std::array<wordle::result, wordle::length> three_hits
+	{
+		{ wordle::result::green, wordle::result::green, wordle::result::green, wordle::result::grey, wordle::result::grey }
+	};
+
+	// Act
+	auto target = wordle::report("heart", "heavy");
+
+	// Assert
+	EXPECT_EQ(three_hits, target);
+}
+
 TEST(TestWordle, TestReportFourHits)
 {
 	// Arrange
@@ -102,3 +132,20 @@ TEST(TestWordle, TestReportAllHits)
 	// Assert
 	EXPECT_EQ(all_hits, target);
 }
+
+TEST(TestWordle, TestReportRepeatedLetters)
+{
+	// Arrange
+	std::array<wordle::result, wordle::length> repeat_letter
+	{
+		{ wordle::result::green, wordle::result::green, wordle::result::green, wordle::result::green, wordle::result::grey }
+	};
+
+	// Act
+	auto target = wordle::report("lever", "level");
+
+	// Assert
+	EXPECT_EQ(repeat_letter, target);
+}
+
+

@@ -1,0 +1,24 @@
+// MainViewModel.idl
+
+import "CommonEnums.idl";
+import "Letter.idl";
+import "WordRow.idl";
+
+namespace WordleWinUI
+{
+	runtimeclass MainViewModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		MainViewModel();
+
+		Windows.Foundation.Collections.IObservableVector<WordRow> Rows;
+
+		Windows.Foundation.Collections.IObservableVector<IInspectable> KeyboardRow1;
+		Windows.Foundation.Collections.IObservableVector<IInspectable> KeyboardRow2;
+		Windows.Foundation.Collections.IObservableVector<IInspectable> KeyboardRow3;
+
+		void InitialiseGame();
+
+		GameStatus EnterLetter(String hs);
+	}
+
+}

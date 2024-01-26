@@ -1,0 +1,15 @@
+// CommonEnums.idl
+
+namespace WordleWinUI
+{
+	enum GameStatus
+	{
+		Unknown,
+		InvalidLine,
+		InvalidWord,
+		Win,
+		Lose,
+		ThisTurn,
+		NextTurn
+	};
+}
