@@ -4,6 +4,17 @@
 
 #include "Letter.h"
 
+using namespace winrt;
+using namespace winrt::Windows::UI;
+using namespace winrt::Windows::System;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
+
+using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Data;
+using namespace Microsoft::UI::Xaml::Controls;
+using namespace Microsoft::UI::Xaml::Media;
+
 namespace {
     constexpr std::array<std::string_view, 10> keyboardRow1{ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"};
     constexpr std::array<std::string_view, 9>  keyboardRow2{ "A", "S", "D", "F", "G", "H", "J", "K", "L" };
@@ -15,28 +26,28 @@ namespace winrt::WordleWinUI::implementation
     MainViewModel::MainViewModel()
     {
         // Initialise the collection of rows
-        m_rows = winrt::single_threaded_observable_vector<WordleWinUI::WordRow>();
-        m_rows.Append(winrt::make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(winrt::make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(winrt::make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(winrt::make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(winrt::make<WordleWinUI::implementation::WordRow>());
+        m_rows = single_threaded_observable_vector<WordleWinUI::WordRow>();
+        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
+        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
+        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
+        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
+        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
 
         // Initialise the keyboard
-        m_keyboardRow1 = winrt::single_threaded_observable_vector<Windows::Foundation::IInspectable>();
-        m_keyboardRow2 = winrt::single_threaded_observable_vector<Windows::Foundation::IInspectable>();
-        m_keyboardRow3 = winrt::single_threaded_observable_vector<Windows::Foundation::IInspectable>();
+        m_keyboardRow1 = single_threaded_observable_vector<IInspectable>();
+        m_keyboardRow2 = single_threaded_observable_vector<IInspectable>();
+        m_keyboardRow3 = single_threaded_observable_vector<IInspectable>();
 
         // https://github.com/jamesmontemagno/FiveLetters/blob/master/FiveLetters/ViewModel/GameViewModel.cs
         // C#: KeyboardRow1 = "QWERTYUIOP".ToCharArray();
         for (const auto& letter : keyboardRow1)
-            m_keyboardRow1.Append(winrt::box_value(to_hstring(letter)));
+            m_keyboardRow1.Append(box_value(to_hstring(letter)));
 
         for (const auto& letter : keyboardRow2)
-            m_keyboardRow2.Append(winrt::box_value(to_hstring(letter)));
+            m_keyboardRow2.Append(box_value(to_hstring(letter)));
 
         for (const auto& letter : keyboardRow3)
-            m_keyboardRow3.Append(winrt::box_value(to_hstring(letter)));
+            m_keyboardRow3.Append(box_value(to_hstring(letter)));
 
         InitialiseGame();
     }
@@ -52,7 +63,7 @@ namespace winrt::WordleWinUI::implementation
         m_rowIndex = 0;
         m_colIndex = 0;
 
-        Microsoft::UI::Xaml::Media::SolidColorBrush brush{ winrt::Windows::UI::Colors::Transparent() };
+        SolidColorBrush brush{ Colors::Transparent() };
         hstring blank{ L" " };
 
         // Reset letters
@@ -70,12 +81,12 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    Windows::Foundation::Collections::IObservableVector<WordleWinUI::WordRow> MainViewModel::Rows() const
+    IObservableVector<WordleWinUI::WordRow> MainViewModel::Rows() const
     {
         return m_rows;
     }
 
-    void MainViewModel::Rows(Windows::Foundation::Collections::IObservableVector<WordleWinUI::WordRow> const& value)
+    void MainViewModel::Rows(IObservableVector<WordleWinUI::WordRow> const& value)
     {
         if (m_rows != value)
         {
@@ -84,12 +95,12 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> MainViewModel::KeyboardRow1() const
+    IObservableVector<IInspectable> MainViewModel::KeyboardRow1() const
     {
         return m_keyboardRow1;
     }
 
-    void MainViewModel::KeyboardRow1(Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> const& value)
+    void MainViewModel::KeyboardRow1(IObservableVector<IInspectable> const& value)
     {
         if (m_keyboardRow1 != value)
         {
@@ -98,12 +109,12 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> MainViewModel::KeyboardRow2() const
+    IObservableVector<IInspectable> MainViewModel::KeyboardRow2() const
     {
         return m_keyboardRow2;
     }
 
-    void MainViewModel::KeyboardRow2(Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> const& value)
+    void MainViewModel::KeyboardRow2(IObservableVector<IInspectable> const& value)
     {
         if (m_keyboardRow2 != value)
         {
@@ -112,12 +123,12 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> MainViewModel::KeyboardRow3() const
+    IObservableVector<IInspectable> MainViewModel::KeyboardRow3() const
     {
         return m_keyboardRow3;
     }
 
-    void MainViewModel::KeyboardRow3(Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> const& value)
+    void MainViewModel::KeyboardRow3(IObservableVector<IInspectable> const& value)
     {
         if (m_keyboardRow3 != value)
         {
@@ -127,7 +138,7 @@ namespace winrt::WordleWinUI::implementation
     }
 
     // Registers property changed event handler.
-    event_token MainViewModel::PropertyChanged(Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& value)
+    event_token MainViewModel::PropertyChanged(PropertyChangedEventHandler const& value)
     {
         return m_propertyChanged.add(value);
     }
@@ -141,19 +152,19 @@ namespace winrt::WordleWinUI::implementation
     // Triggers property changed notification.
     void MainViewModel::RaisePropertyChanged(hstring const& propertyName)
     {
-        m_propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(propertyName));
+        m_propertyChanged(*this, PropertyChangedEventArgs(propertyName));
     }
 
-    winrt::Windows::UI::Color MainViewModel::GetBackgroundColor(wordle::result colour) const
+    Color MainViewModel::GetBackgroundColor(wordle::result colour) const
     {
         if (colour == wordle::result::grey)
-            return winrt::Windows::UI::Color(winrt::Windows::UI::Colors::Gray());
+            return Colors::Gray();
         else if (colour == wordle::result::orange)
-            return winrt::Windows::UI::Color(winrt::Windows::UI::Colors::Orange());
+            return Colors::Orange();
         else if (colour == wordle::result::green)
-            return winrt::Windows::UI::Color(winrt::Windows::UI::Colors::Green());
+            return Colors::Green();
         else
-            return winrt::Windows::UI::Color(winrt::Windows::UI::Colors::Transparent());
+            return Colors::Transparent();
     }
 
     std::string MainViewModel::GetGuess() const
@@ -186,7 +197,7 @@ namespace winrt::WordleWinUI::implementation
         std::string s{ GetGuess() };
         if (!wordle::is_valid(s))
         {
-            Microsoft::UI::Xaml::Media::SolidColorBrush brush{ winrt::Windows::UI::Colors::PaleVioletRed() };
+            SolidColorBrush brush{ Colors::PaleVioletRed() };
             for (uint32_t column = 0; column < wordle::length; ++column)
             {
                 letters.GetAt(column).ColorBrush(brush);
@@ -197,7 +208,7 @@ namespace winrt::WordleWinUI::implementation
         auto results = wordle::report(s, m_target);
         for (uint32_t column = 0; column < wordle::length; ++column)
         {
-            Microsoft::UI::Xaml::Media::SolidColorBrush brush{ GetBackgroundColor(results[column]) };
+            SolidColorBrush brush{ GetBackgroundColor(results[column]) };
             
             letters.GetAt(column).ColorBrush(brush);
         }
@@ -237,7 +248,7 @@ namespace winrt::WordleWinUI::implementation
 
             m_colIndex--;
 
-            Microsoft::UI::Xaml::Media::SolidColorBrush brush{ winrt::Windows::UI::Colors::Transparent() };
+            SolidColorBrush brush{ Colors::Transparent() };
             hstring blank{ L" " };
 
             auto row = Rows().GetAt(m_rowIndex);

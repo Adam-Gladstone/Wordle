@@ -1,0 +1,29 @@
+// ModalView.idl
+
+import "CommonEnums.idl";
+
+namespace WordleWinUI
+{
+	[default_interface]
+	[Microsoft.UI.Xaml.Data.Bindable]
+	runtimeclass ModalView : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		ModalView();
+
+		static Windows.Foundation.IAsyncOperation<Microsoft.UI.Xaml.Controls.ContentDialogResult>
+			MessageDialogAsync(
+				Microsoft.UI.Xaml.FrameworkElement element,
+				String title,
+				String message
+			);
+
+		static Windows.Foundation.IAsyncOperation<Microsoft.UI.Xaml.Controls.ContentDialogResult>
+			MessageDialogAsync(
+				Microsoft.UI.Xaml.FrameworkElement element,
+				String title,
+				String message,
+				MessageBoxButtonType buttons,
+				MessageBoxIconType icon
+			);
+	}
+}

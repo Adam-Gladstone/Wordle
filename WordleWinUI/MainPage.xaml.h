@@ -15,10 +15,10 @@ namespace winrt::WordleWinUI::implementation
     private:
         WordleWinUI::MainViewModel m_mainViewModel{ nullptr };
 
-        void ReportGameResult(hstring const& text) const;
+        Windows::Foundation::IAsyncAction ReportGameResult(hstring const& text) const;
 
     public:
-        void Keyboard_Tapped(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& e);
+        Windows::Foundation::IAsyncAction Keyboard_Tapped(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& e);
     };
 }
 

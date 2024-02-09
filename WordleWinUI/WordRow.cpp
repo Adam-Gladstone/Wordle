@@ -2,25 +2,35 @@
 #include "WordRow.h"
 #include "WordRow.g.cpp"
 
+using namespace winrt;
+using namespace winrt::Windows::System;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
+
+using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Data;
+using namespace Microsoft::UI::Xaml::Controls;
+
+
 namespace winrt::WordleWinUI::implementation
 {
     WordRow::WordRow()
     {
-        m_letters = winrt::single_threaded_observable_vector<WordleWinUI::Letter>();
+        m_letters = single_threaded_observable_vector<WordleWinUI::Letter>();
 
-        m_letters.Append(winrt::make<WordleWinUI::implementation::Letter>());
-        m_letters.Append(winrt::make<WordleWinUI::implementation::Letter>());
-        m_letters.Append(winrt::make<WordleWinUI::implementation::Letter>());
-        m_letters.Append(winrt::make<WordleWinUI::implementation::Letter>());
-        m_letters.Append(winrt::make<WordleWinUI::implementation::Letter>());
+        m_letters.Append(make<WordleWinUI::implementation::Letter>());
+        m_letters.Append(make<WordleWinUI::implementation::Letter>());
+        m_letters.Append(make<WordleWinUI::implementation::Letter>());
+        m_letters.Append(make<WordleWinUI::implementation::Letter>());
+        m_letters.Append(make<WordleWinUI::implementation::Letter>());
     }
 
-    Windows::Foundation::Collections::IObservableVector<WordleWinUI::Letter> WordRow::Letters() const
+    IObservableVector<WordleWinUI::Letter> WordRow::Letters() const
     {
         return m_letters;
     }
 
-    void WordRow::Letters(Windows::Foundation::Collections::IObservableVector<WordleWinUI::Letter> const& value)
+    void WordRow::Letters(IObservableVector<WordleWinUI::Letter> const& value)
     {
         if (m_letters != value)
         {
@@ -33,13 +43,13 @@ namespace winrt::WordleWinUI::implementation
     // PropertyChanged handling
     //
 
-    winrt::event_token WordRow::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    event_token WordRow::PropertyChanged(PropertyChangedEventHandler const& handler)
     {
         return m_propertyChanged.add(handler);
     }
     
     // Unregisters property changed event handler.
-    void WordRow::PropertyChanged(winrt::event_token const& token) noexcept
+    void WordRow::PropertyChanged(event_token const& token) noexcept
     {
         m_propertyChanged.remove(token);
 
@@ -48,6 +58,6 @@ namespace winrt::WordleWinUI::implementation
     // Triggers property changed notification.
     void WordRow::RaisePropertyChanged(hstring const& propertyName)
     {
-        m_propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(propertyName));
+        m_propertyChanged(*this, PropertyChangedEventArgs(propertyName));
     }
 }

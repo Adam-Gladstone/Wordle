@@ -16,6 +16,10 @@
 
 
 # Changes
-## 27/01/2023
+## 27/01/2024
 Initial checkin
+
+## 09/02/2024
+- Updated end of game message boxes. This now uses a more generic MessageDialogAsync call to emulate Windows message boxes
+- Removed redundant namespaces.
 

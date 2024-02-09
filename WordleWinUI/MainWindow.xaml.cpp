@@ -13,7 +13,7 @@ namespace winrt::WordleWinUI::implementation
     {
         InitializeComponent();
 
-        winrt::hstring title{ L"WordleWinUI" };
+        hstring title{ L"WordleWinUI" };
         this->Title(title);
         //
         // Requires including '#include <winrt/Microsoft.UI.Windowing.h>'

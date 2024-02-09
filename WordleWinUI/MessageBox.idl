@@ -1,0 +1,14 @@
+// MessageBox.idl
+
+namespace WordleWinUI
+{
+    [default_interface]
+    runtimeclass MessageBox : Microsoft.UI.Xaml.Controls.Page
+    {
+        MessageBox();
+
+        String ImageSource;
+
+        String MessageText;
+    }
+}

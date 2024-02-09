@@ -7,11 +7,16 @@
 #include <string>
 #include <algorithm>
 
-#include "MessageDialog.xaml.h"
+#include "App.xaml.h"
+#include "MessageBox.xaml.h"
 
 using namespace winrt;
 using namespace winrt::Windows::System;
+using namespace winrt::Windows::Foundation;
+
 using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Controls;
+using namespace Microsoft::UI::Xaml::Input;
 
 namespace winrt::WordleWinUI::implementation
 {
@@ -19,7 +24,7 @@ namespace winrt::WordleWinUI::implementation
     {
         InitializeComponent();
 
-        m_mainViewModel = winrt::make<WordleWinUI::implementation::MainViewModel>();
+        m_mainViewModel = make<WordleWinUI::implementation::MainViewModel>();
     }
 
     winrt::WordleWinUI::MainViewModel MainPage::ViewModel()
@@ -27,54 +32,49 @@ namespace winrt::WordleWinUI::implementation
         return m_mainViewModel;
     }
 
-    void MainPage::Keyboard_Tapped(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const&)
+    IAsyncAction MainPage::Keyboard_Tapped(IInspectable const& sender, TappedRoutedEventArgs const&)
     {
-        auto textBlock = sender.as<::winrt::Microsoft::UI::Xaml::Controls::TextBlock>();
+        auto textBlock = sender.as<TextBlock>();
 
         auto text = textBlock.Text();
 
-        winrt::WordleWinUI::GameStatus status = m_mainViewModel.EnterLetter(text);
+        WordleWinUI::GameStatus status = m_mainViewModel.EnterLetter(text);
 
-        if (status == winrt::WordleWinUI::GameStatus::Win)
+        if (status == WordleWinUI::GameStatus::Win)
         {
-            ReportGameResult(L"Genius. You win.");
+            return ReportGameResult(L"You win.\nDo you want to play again?");
         }
-        else if (status == winrt::WordleWinUI::GameStatus::Lose)
+        else if (status == WordleWinUI::GameStatus::Lose)
         {
-            ReportGameResult(L"Game Over! You are out of turns.");
+            return ReportGameResult(L"Game Over! You are out of turns.\nDo you want to play again?");
+        }
+        else
+        {
+            return {};
         }
     }
 
-    void MainPage::ReportGameResult(hstring const& text) const
+    IAsyncAction MainPage::ReportGameResult(hstring const& text) const
     {
-        winrt::Microsoft::UI::Xaml::Controls::ContentDialog dialog{};
+        hstring title = App::Window().Title();
 
-        auto inner = winrt::make<WordleWinUI::implementation::MessageDialog>();
-        inner.MessageText(text);
+        auto result = co_await WordleWinUI::ModalView::MessageDialogAsync(
+            *this,
+            title,
+            text,
+            WordleWinUI::MessageBoxButtonType::YesNo,
+            WordleWinUI::MessageBoxIconType::Question);
 
-        dialog.XamlRoot(this->XamlRoot());
-        dialog.Title(box_value(L"Game Result"));
-        dialog.Content(box_value(text));
-        //dialog.Content(inner);
-        dialog.PrimaryButtonText(L"Ok");
-        dialog.IsPrimaryButtonEnabled(true);
-        dialog.PrimaryButtonClick(
-            [&](auto&& ...)
-            {
-                m_mainViewModel.InitialiseGame();
-            }
-        );
-
-        dialog.ShowAsync().Completed([&](auto&& ...) {});
-
-        /*
-        winrt::Windows::Foundation::IAsyncOperation<winrt::Microsoft::UI::Xaml::Controls::ContentDialogResult> result
-            = dialog.ShowAsync();
-        if (result.GetResults() == winrt::Microsoft::UI::Xaml::Controls::ContentDialogResult::Primary)
+        if (result == ContentDialogResult::Primary)
         {
+            CPP_TRACE("MessageBox was closed with the primary button.\n");
+
             m_mainViewModel.InitialiseGame();
         }
-        */
+        else
+        {
+            CPP_TRACE("MessageBox was cancelled.\n");
+        }
     }
 }
 

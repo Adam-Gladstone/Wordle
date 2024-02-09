@@ -2,6 +2,12 @@
 #include "Letter.h"
 #include "Letter.g.cpp"
 
+using namespace winrt;
+
+using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Data;
+using namespace Microsoft::UI::Xaml::Media;
+
 namespace winrt::WordleWinUI::implementation
 {
     hstring Letter::Input() const
@@ -18,16 +24,16 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    Microsoft::UI::Xaml::Media::Brush Letter::ColorBrush() const
+    Brush Letter::ColorBrush() const
     {
         return m_brush;
     }
 
-    void Letter::ColorBrush(Microsoft::UI::Xaml::Media::Brush const& value)
+    void Letter::ColorBrush(Brush const& value)
     {
         if (m_brush != value)
         {
-            m_brush = value.as<Microsoft::UI::Xaml::Media::SolidColorBrush>();
+            m_brush = value.as<SolidColorBrush>();
             RaisePropertyChanged(L"ColorBrush");
         }
     }
@@ -37,13 +43,13 @@ namespace winrt::WordleWinUI::implementation
     //
 
 
-    winrt::event_token Letter::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    event_token Letter::PropertyChanged(PropertyChangedEventHandler const& handler)
     {
         return m_propertyChanged.add(handler);
     }
     
     // Unregisters property changed event handler.
-    void Letter::PropertyChanged(winrt::event_token const& token) noexcept
+    void Letter::PropertyChanged(event_token const& token) noexcept
     {
         m_propertyChanged.remove(token);
     }
@@ -51,6 +57,6 @@ namespace winrt::WordleWinUI::implementation
     // Triggers property changed notification.
     void Letter::RaisePropertyChanged(hstring const& propertyName)
     {
-        m_propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(propertyName));
+        m_propertyChanged(*this, PropertyChangedEventArgs(propertyName));
     }
 }

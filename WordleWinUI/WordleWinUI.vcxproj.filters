@@ -17,21 +17,18 @@
     <Midl Include="CommonEnums.idl">
       <Filter>Enums</Filter>
     </Midl>
+    <Midl Include="ModalView.idl">
+      <Filter>Services</Filter>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="DiagnosticTrace.cpp" />
-    <ClCompile Include="ColorConverter.cpp">
-      <Filter>Converters</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="DiagnosticTrace.h" />
-    <ClInclude Include="ColorConverter.h">
-      <Filter>Converters</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -190,6 +187,30 @@
     <Image Include="Assets\StoreLogo.scale-400.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\asterisk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\error.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\exclamation.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\hand.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\information.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\question.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\stop.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\warning.png">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">
@@ -210,6 +231,9 @@
     <Filter Include="Enums">
       <UniqueIdentifier>{7a3e1d2e-b96d-4a0e-b16a-f577f24ed9e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{ecb9815e-0538-496c-bff5-402a39a369bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="app.manifest" />
@@ -227,7 +251,7 @@
     <Page Include="MainPage.xaml">
       <Filter>Views</Filter>
     </Page>
-    <Page Include="MessageDialog.xaml">
+    <Page Include="MessageBox.xaml">
       <Filter>Dialogs</Filter>
     </Page>
   </ItemGroup>
