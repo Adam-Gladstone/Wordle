@@ -23,3 +23,6 @@ Initial checkin
 - Updated end of game message boxes. This now uses a more generic MessageDialogAsync call to emulate Windows message boxes
 - Removed redundant namespaces.
 
+## 10/02/2024
+- Added generic settings class with a single setting for LightTheme.
+- Added support for getting/setting LightTheme.

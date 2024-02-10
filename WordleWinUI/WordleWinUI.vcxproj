@@ -140,6 +140,9 @@
     <ClInclude Include="MainViewModel.h">
       <DependentUpon>MainViewModel.idl</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Settings.h">
+      <DependentUpon>Settings.idl</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="MainWindow.xaml.cpp">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <DependentUpon>Settings.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="Letter.cpp">
       <DependentUpon>Letter.idl</DependentUpon>
@@ -202,6 +208,7 @@
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="ModalView.idl" />
+    <Midl Include="Settings.idl" />
     <Midl Include="WordRow.idl" />
   </ItemGroup>
   <ItemGroup>

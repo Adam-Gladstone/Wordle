@@ -1,0 +1,13 @@
+// Settings.idl
+
+namespace WordleWinUI
+{
+	[Microsoft.UI.Xaml.Data.Bindable]
+	runtimeclass Settings : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		Settings();
+
+		Boolean LightTheme;
+	}
+
+}

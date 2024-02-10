@@ -72,7 +72,9 @@ This project demonstrates:
   * Resizing the main application window; setting an application icon.
   * Using Package.appxmanifest to generate icons for the taskbar.
   * Defining models using MIDL3.0, and providing implementations and type conversions.
-  * `ContentDialog` and a custom MessageDialog (this is still a work in progress).
+  * `ContentDialog` and a custom MessageBox (this is still a work in progress).
+  * Support for Light/Dark mode via a toggle button on the `MainPage`.
+  * Support for persisting and retrieving the `LightTheme` setting from local application settings.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

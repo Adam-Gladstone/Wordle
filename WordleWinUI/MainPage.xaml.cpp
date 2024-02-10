@@ -13,6 +13,7 @@
 using namespace winrt;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Storage;
 
 using namespace Microsoft::UI::Xaml;
 using namespace Microsoft::UI::Xaml::Controls;
@@ -25,11 +26,24 @@ namespace winrt::WordleWinUI::implementation
         InitializeComponent();
 
         m_mainViewModel = make<WordleWinUI::implementation::MainViewModel>();
+
+        m_settings = make<WordleWinUI::implementation::Settings>();
+
+        bool hasSetting = localSettings ? localSettings.Values().HasKey(L"LightTheme") : false;
+        bool isLightTheme = hasSetting ? localSettings.Values().Lookup(L"LightTheme").as<bool>() : true;
+        m_settings.LightTheme(isLightTheme);
+
+        ApplyTheme();
     }
 
-    winrt::WordleWinUI::MainViewModel MainPage::ViewModel()
+    WordleWinUI::MainViewModel MainPage::ViewModel()
     {
         return m_mainViewModel;
+    }
+
+    WordleWinUI::Settings MainPage::ApplicationSettings()
+    {
+        return m_settings;
     }
 
     IAsyncAction MainPage::Keyboard_Tapped(IInspectable const& sender, TappedRoutedEventArgs const&)
@@ -76,5 +90,24 @@ namespace winrt::WordleWinUI::implementation
             CPP_TRACE("MessageBox was cancelled.\n");
         }
     }
-}
 
+    void MainPage::ToggleButton_Click(IInspectable const& sender, RoutedEventArgs const& e)
+    {
+        auto settings = ApplicationSettings();
+
+        settings.LightTheme(!settings.LightTheme());
+
+        localSettings.Values().Insert(L"LightTheme", box_value(settings.LightTheme()));
+
+        ApplyTheme();
+    }
+
+    void MainPage::ApplyTheme()
+    {
+        auto settings = ApplicationSettings();
+
+        Microsoft::UI::Xaml::FrameworkElement const& element = (*this);
+
+        element.RequestedTheme(settings.LightTheme() ? ElementTheme::Light : ElementTheme::Dark);
+    }
+}

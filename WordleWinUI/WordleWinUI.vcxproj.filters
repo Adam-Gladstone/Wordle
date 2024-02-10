@@ -20,6 +20,9 @@
     <Midl Include="ModalView.idl">
       <Filter>Services</Filter>
     </Midl>
+    <Midl Include="Settings.idl">
+      <Filter>Model</Filter>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

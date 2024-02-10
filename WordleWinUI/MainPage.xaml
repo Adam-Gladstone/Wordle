@@ -6,13 +6,10 @@
     xmlns:local="using:WordleWinUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:WordleWinUI"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Page.Resources>
-
-        <Color x:Key="PrimaryColor">White</Color>
-
-        <Color x:Key="SecondaryColor">#212121</Color>
 
         <UniformGridLayout
             x:Key="KeyboardLayout"
@@ -27,7 +24,7 @@
                 Height="30"
                 Padding="5,5,5,5"
                 Background="LightGray"
-                BorderBrush="Black"
+                BorderBrush="{ThemeResource AppBarItemForegroundThemeBrush}"
                 BorderThickness="2"
                 CornerRadius="4">
                 <TextBlock
@@ -61,7 +58,7 @@
                 Height="50"
                 Margin="1,1,1,1"
                 Background="{x:Bind ColorBrush, Mode=TwoWay}"
-                BorderBrush="Black"
+                BorderBrush="{ThemeResource AppBarItemForegroundThemeBrush}"
                 BorderThickness="1"
                 CornerRadius="8">
                 <TextBlock
@@ -85,11 +82,44 @@
 
         <!--  Title/header line  -->
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <SymbolIcon Margin="8,4,0,0" Symbol="Library" />
-            <TextBlock
-                Margin="8,0,0,0"
-                Style="{StaticResource SubheaderTextBlockStyle}"
-                Text="WordleWinUI" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <SymbolIcon
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="8,5,0,0"
+                    Symbol="Library" />
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="8,0,0,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource SubheaderTextBlockStyle}"
+                    Text="WordleWinUI" />
+
+                <!--  Theme Switcher  -->
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="150,5,0,0"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Click="ToggleButton_Click">
+                    <FontIcon FontSize="14" Glyph="&#xE793;" />
+                </Button>
+
+            </Grid>
+
         </StackPanel>
 
         <!--  Game field  -->

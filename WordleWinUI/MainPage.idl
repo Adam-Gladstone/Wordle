@@ -1,3 +1,4 @@
+import "Settings.idl";
 import "MainViewModel.idl";
 
 namespace WordleWinUI
@@ -8,5 +9,7 @@ namespace WordleWinUI
         MainPage();
 
         MainViewModel ViewModel{ get; };
+
+        Settings ApplicationSettings{ get; };
     }
 }
