@@ -91,7 +91,7 @@ namespace winrt::WordleWinUI::implementation
         }
     }
 
-    void MainPage::ToggleButton_Click(IInspectable const& sender, RoutedEventArgs const& e)
+    void MainPage::ToggleButton_Click(IInspectable const& /* sender */, RoutedEventArgs const& /* e */)
     {
         auto settings = ApplicationSettings();
 
