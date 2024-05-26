@@ -4,6 +4,8 @@
 
 #include "Letter.h"
 
+#include <vector>
+
 using namespace winrt;
 using namespace winrt::Windows::UI;
 using namespace winrt::Windows::System;
@@ -16,9 +18,11 @@ using namespace Microsoft::UI::Xaml::Controls;
 using namespace Microsoft::UI::Xaml::Media;
 
 namespace {
-    constexpr std::array<std::string_view, 10> keyboardRow1{ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"};
-    constexpr std::array<std::string_view, 9>  keyboardRow2{ "A", "S", "D", "F", "G", "H", "J", "K", "L" };
-    constexpr std::array<std::string_view, 9>  keyboardRow3{ "<", "Z", "X", "C", "V", "B", "N", "M", ">" };
+
+    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> GetKeyboardRow(std::vector<IInspectable> v)
+    {
+        return single_threaded_observable_vector<IInspectable>(std::move(v));
+    }
 }
 
 namespace winrt::WordleWinUI::implementation
@@ -26,28 +30,29 @@ namespace winrt::WordleWinUI::implementation
     MainViewModel::MainViewModel()
     {
         // Initialise the collection of rows
-        m_rows = single_threaded_observable_vector<WordleWinUI::WordRow>();
-        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
-        m_rows.Append(make<WordleWinUI::implementation::WordRow>());
+        m_rows = single_threaded_observable_vector<WordleWinUI::WordRow>(
+            { 
+                make<WordleWinUI::implementation::WordRow>(), 
+                make<WordleWinUI::implementation::WordRow>(),
+                make<WordleWinUI::implementation::WordRow>(),
+                make<WordleWinUI::implementation::WordRow>(),
+                make<WordleWinUI::implementation::WordRow>() 
+            }
+        );
+        
+        // Initialise the keyboard - box the hstring values so they are iinspectable
+        m_keyboardRow1 = GetKeyboardRow({ 
+            box_value(L"Q"), box_value(L"W"), box_value(L"E"), box_value(L"R"), box_value(L"T"), 
+            box_value(L"Y"), box_value(L"U"), box_value(L"I"), box_value(L"O"), box_value(L"P") });
 
-        // Initialise the keyboard
-        m_keyboardRow1 = single_threaded_observable_vector<IInspectable>();
-        m_keyboardRow2 = single_threaded_observable_vector<IInspectable>();
-        m_keyboardRow3 = single_threaded_observable_vector<IInspectable>();
-
-        // https://github.com/jamesmontemagno/FiveLetters/blob/master/FiveLetters/ViewModel/GameViewModel.cs
-        // C#: KeyboardRow1 = "QWERTYUIOP".ToCharArray();
-        for (const auto& letter : keyboardRow1)
-            m_keyboardRow1.Append(box_value(to_hstring(letter)));
-
-        for (const auto& letter : keyboardRow2)
-            m_keyboardRow2.Append(box_value(to_hstring(letter)));
-
-        for (const auto& letter : keyboardRow3)
-            m_keyboardRow3.Append(box_value(to_hstring(letter)));
+        m_keyboardRow2 = GetKeyboardRow({
+            box_value(L"A"), box_value(L"S"), box_value(L"D"), box_value(L"F"), box_value(L"G"),
+            box_value(L"H"), box_value(L"J"), box_value(L"K"), box_value(L"L")
+            });
+        m_keyboardRow3 = GetKeyboardRow({
+            box_value(L"<"), box_value(L"Z"), box_value(L"X"), box_value(L"C"), box_value(L"V"),
+            box_value(L"B"), box_value(L"N"), box_value(L"M"), box_value(L">")
+            });
 
         InitialiseGame();
     }
